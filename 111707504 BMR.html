@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMR 計算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        h1, h2 {
+            text-align: center;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BMR 計算器</h1>
+        <label for="gender">性別：</label>
+        <select id="gender">
+            <option value="male">男性</option>
+            <option value="female">女性</option>
+        </select>
+        <label for="age">年齡：</label>
+        <input type="number" id="age" placeholder="輸入您的年齡" min="1" required>
+        <label for="weight">體重（公斤）：</label>
+        <input type="number" id="weight" placeholder="輸入您的體重" min="1" required>
+        <label for="height">身高（公分）：</label>
+        <input type="number" id="height" placeholder="輸入您的身高" min="1" required>
+        <button onclick="calculateBMR()">計算</button>
+        <h2>您的BMR是：<span id="result"></span> 大卡/日</h2>
+    </div>
+    
+    <script>
+        function calculateBMR() {
+            var gender = document.getElementById("gender").value;
+            var age = parseInt(document.getElementById("age").value);
+            var weight = parseInt(document.getElementById("weight").value);
+            var height = parseInt(document.getElementById("height").value);
+            var resultElement = document.getElementById("result");
+            
+            var bmr = 0;
+            
+            if (gender === "male") {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else if (gender === "female") {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+            
+            resultElement.textContent = bmr.toFixed(2);
+        }
+    </script>
+</body>
+</html>
